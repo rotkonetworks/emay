@@ -1,13 +1,16 @@
+"use client"
+
 import React from "react"
 import { Check } from "lucide-react"
 import Image from "next/image"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, heroStaggerContainer, heroImageVariant } from "@/lib/animations"
 import { HeroForm } from "./hero-form"
-
-/* Update the hero section background in dark mode */
+import { useI18n } from "@/lib/i18n"
 
 export const HeroSection = React.memo(function HeroSection() {
+  const { t } = useI18n()
+
   return (
     <section className="relative flex min-h-screen items-start pt-8 pb-16 lg:items-center bg-emay-lime dark:bg-dark-green-button overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -49,12 +52,11 @@ export const HeroSection = React.memo(function HeroSection() {
           <div className="space-y-6">
             <MotionWrapper tag="div" variants={fadeInUp} className="space-y-4">
               <h1 className="text-4xl font-bold leading-tight text-black dark:text-white md:text-5xl lg:text-7xl">
-                Fast, Private Email.
-                <span className="text-[#FF2670]"> For Free.</span>
+                {t("hero.title")}
+                <span className="text-[#FF2670]">{t("hero.titleHighlight")}</span>
               </h1>
               <p className="max-w-lg text-lg leading-relaxed text-storm-700 dark:text-storm-400 md:text-xl">
-                A modern email experience focused on speed, security, and simplicity. Get from zero to mailbox in
-                seconds.
+                {t("hero.subtitle")}
               </p>
             </MotionWrapper>
 
@@ -69,15 +71,15 @@ export const HeroSection = React.memo(function HeroSection() {
             >
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 flex-shrink-0 text-[#FF2670]" />
-                <span>No passwords, ever</span>
+                <span>{t("hero.benefits.noPasswords")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 flex-shrink-0 text-[#FF2670]" />
-                <span>Generous free plan</span>
+                <span>{t("hero.benefits.freePlan")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 flex-shrink-0 text-[#FF2670]" />
-                <span>7-day trial for premium names</span>
+                <span>{t("hero.benefits.trial")}</span>
               </div>
             </MotionWrapper>
           </div>

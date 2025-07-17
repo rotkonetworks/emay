@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
 import { ThemeProvider } from "@/components/theme-provider"
+import { I18nProvider } from "@/lib/i18n"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -24,11 +25,19 @@ export const metadata: Metadata = {
     siteName: "emay.me",
     type: "website",
     locale: "en_US",
+    alternateLocale: ["es_ES"],
   },
   twitter: {
     card: "summary_large_image",
     title: "emay.me - Fast, Private Email Built on JMAP",
     description: "Experience a faster, more private email with emay.me, built on the modern JMAP protocol.",
+  },
+  alternates: {
+    canonical: "https://emay.me",
+    languages: {
+      en: "https://emay.me",
+      es: "https://emay.me/es",
+    },
   },
     generator: 'v0.dev'
 }
@@ -48,6 +57,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://emay.me" />
+        <link rel="alternate" hrefLang="en" href="https://emay.me" />
+        <link rel="alternate" hrefLang="es" href="https://emay.me/es" />
+        <link rel="alternate" hrefLang="x-default" href="https://emay.me" />
         <meta name="google-site-verification" content="your-verification-code" />
         <Script
           id="website-schema"
@@ -58,38 +70,15 @@ export default function RootLayout({
               "@type": "WebSite",
               name: "emay.me",
               url: "https://emay.me",
-            }),
-          }}
-        />
-        <Script
-          id="software-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              name: "emay.me Android App",
-              operatingSystem: "ANDROID",
-              applicationCategory: "CommunicationApplication",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-              },
-              publisher: {
-                "@type": "Organization",
-                name: "emay.me",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://emay.me/emay-icon.svg",
-                },
-              },
+              inLanguage: ["en", "es"],
             }),
           }}
         />
       </head>
       <body className={inter.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

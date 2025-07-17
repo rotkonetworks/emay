@@ -97,6 +97,21 @@
     @apply flex h-12 w-12 items-center justify-center;
   }
 
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   /* Responsive flex values using media queries */
   @media (min-width: 640px) {
     .hero-flex-left {

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import type { AuthState } from "@/app/auth/action"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useI18n } from "@/lib/i18n"
 
 type StreamlinedAuthModalProps = {
   isOpen: boolean
@@ -21,6 +22,7 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
   onOpenChange,
   authState,
 }: StreamlinedAuthModalProps) {
+  const { t } = useI18n()
   const [view, setView] = useState<AuthView>("main")
   const [email, setEmail] = useState("")
   const { flow, email: userEmail, isPremium } = authState
@@ -64,16 +66,16 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
             <div className="flex justify-center mb-4">
               <CheckCircle className="h-12 w-12 text-emay-pink" />
             </div>
-            <h3 className="text-xl font-semibold text-black dark:text-white">Check your email</h3>
+            <h3 className="text-xl font-semibold text-black dark:text-white">{t("auth.checkEmail")}</h3>
             <p className="text-storm-700 dark:text-gray-300 mt-2 mb-4">We've sent a secure login link to {userEmail}</p>
             <div className="flex flex-col gap-2">
               <Input
                 type="text"
-                placeholder="Or enter 6-digit code"
+                placeholder={t("auth.verifyCode")}
                 className="h-12 text-center text-lg border-2 border-black dark:border-gray-700 focus:border-emay-pink focus:ring-0 bg-white dark:bg-dark-green-field text-black dark:text-white"
               />
               <Button className="h-12 w-full bg-emay-pink text-white border-2 border-black shadow-sharp hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1 active:translate-x-0 active:translate-y-0 hover:bg-emay-pink/90">
-                Verify Code
+                {t("auth.verifyCode")}
               </Button>
             </div>
           </div>
@@ -91,7 +93,7 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
               onClick={handleContinueToInbox}
               className="h-12 w-full bg-emay-pink text-white border-2 border-black shadow-sharp hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink/90"
             >
-              Continue to Inbox
+              {t("auth.continueToInbox")}
             </Button>
           </div>
         )
@@ -106,7 +108,7 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
             >
               <div className="flex items-center gap-4">
                 <Mail className="w-6 h-6" />
-                <span className="font-semibold">Continue with Magic Link</span>
+                <span className="font-semibold">{t("auth.magicLink")}</span>
               </div>
             </Button>
 
@@ -116,7 +118,7 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
             >
               <div className="flex items-center gap-4">
                 <Github className="w-6 h-6" />
-                <span className="font-semibold">Continue with GitHub</span>
+                <span className="font-semibold">{t("auth.github")}</span>
               </div>
             </Button>
 
@@ -134,7 +136,7 @@ export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
         <DialogHeader>
           <DialogTitle className="text-2xl flex items-center gap-3 text-black dark:text-white">
             <CircleUserRound className="h-8 w-8 text-emay-pink" />
-            {flow === "login" ? "Welcome Back" : "Create Your Account"}
+            {flow === "login" ? t("auth.welcomeBack") : t("auth.createAccount")}
           </DialogTitle>
           <DialogDescription className="text-storm-700 dark:text-gray-300">
             {flow === "login" ? `Sign in to your account for ${userEmail}.` : `Create your account for ${userEmail}.`}

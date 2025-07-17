@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Loader2, AlertCircle } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { StreamlinedAuthModal } from "./auth/streamlined-auth-modal"
+import { useI18n } from "@/lib/i18n"
 
 const initialState: AuthState = {
   status: "initial",
@@ -15,6 +16,7 @@ const initialState: AuthState = {
 }
 
 export const HeroForm = React.memo(function HeroForm() {
+  const { t } = useI18n()
   const [state, setState] = useState<AuthState>(initialState)
   const [isPending, setIsPending] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -80,18 +82,20 @@ export const HeroForm = React.memo(function HeroForm() {
     <div className="w-full max-w-lg">
       <form
         onSubmit={handleFormSubmit}
-        className="flex items-center gap-0 bg-white dark:bg-dark-green-field p-0 border-2 border-black shadow-sharp"
+        className="flex items-center gap-0 bg-card p-0 border-2 border-black shadow-sharp"
       >
         <div className="relative flex-grow">
           <Input
             type="text"
             name="username"
-            placeholder="your.name"
+            placeholder={t("hero.form.placeholder")}
             required
-            className="h-12 w-full border-none bg-transparent pl-3 text-base focus-visible:ring-0 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-300"
+            className="h-12 w-full border-none bg-transparent pl-3 text-base focus-visible:ring-0 text-foreground placeholder:text-muted-foreground"
             aria-label="Enter your desired username"
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-storm-400 dark:text-gray-300">@emay.me</span>
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+            {t("hero.form.suffix")}
+          </span>
         </div>
         <Button
           type="submit"

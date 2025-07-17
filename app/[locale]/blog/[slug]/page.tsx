@@ -1,27 +1,39 @@
-import { getPostBySlug, getAllPosts } from "@/lib/markdown"
+import { getLocalizedBlogPosts } from "@/lib/i18n"
 import { notFound } from "next/navigation"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
+import { getTranslations } from "@/lib/i18n"
 import type { Metadata, Viewport } from "next"
+import type { Locale } from "@/lib/i18n/types"
 import Script from "next/script"
 import Link from "next/link"
 import { ArrowLeft, Clock, Calendar, User } from "lucide-react"
 import { SharpCard } from "@/components/ui/sharp-card"
 
 type Props = {
-  params: { slug: string }
+  params: { locale: Locale; slug: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+  const posts = getLocalizedBlogPosts(params.locale)
+  const post = posts.find((p) => p.slug === params.slug)
+
   if (!post) {
     return {}
   }
+
   return {
     title: `${post.title} - emay.me Blog`,
     description: post.description,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical:
+        params.locale === "en"
+          ? `https://emay.me/blog/${post.slug}`
+          : `https://emay.me/${params.locale}/blog/${post.slug}`,
+      languages: {
+        en: `https://emay.me/blog/${post.slug}`,
+        es: `https://emay.me/es/blog/${post.slug}`,
+      },
     },
   }
 }
@@ -33,14 +45,19 @@ export const viewport: Viewport = {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+  const enPosts = getLocalizedBlogPosts("en")
+  const esPosts = getLocalizedBlogPosts("es")
+
+  return [
+    ...enPosts.map((post) => ({ locale: "en" as const, slug: post.slug })),
+    ...esPosts.map((post) => ({ locale: "es" as const, slug: post.slug })),
+  ]
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug)
+export default function BlogPostPage({ params }: Props) {
+  const translations = getTranslations(params.locale)
+  const posts = getLocalizedBlogPosts(params.locale)
+  const post = posts.find((p) => p.slug === params.slug)
 
   if (!post) {
     notFound()
@@ -78,11 +95,11 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="mx-auto max-w-4xl">
               {/* Back to blog link */}
               <Link
-                href="/blog"
+                href={`/${params.locale}/blog`}
                 className="inline-flex items-center gap-2 text-emay-pink hover:text-emay-pink/80 transition-colors mb-8 font-medium"
               >
                 <ArrowLeft className="h-4 w-4" />
-                Back to Blog
+                {translations["blog.backToBlog"]}
               </Link>
 
               {/* Article header */}
@@ -132,15 +149,15 @@ export default async function BlogPostPage({ params }: Props) {
 
               {/* Call to action */}
               <SharpCard className="bg-emay-lime/10 dark:bg-dark-green-button/20 mt-8 text-center">
-                <h3 className="text-2xl font-bold text-foreground mb-4">Ready to try emay.me?</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{translations["blog.readyToTry"]}</h3>
                 <p className="text-muted-foreground mb-6">
                   Experience the fastest, most private email service. Get started in seconds.
                 </p>
                 <Link
-                  href="/"
+                  href={`/${params.locale}`}
                   className="inline-block px-6 py-3 bg-emay-pink text-white font-semibold border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1"
                 >
-                  Get Started Free
+                  {translations["blog.getStartedFree"]}
                 </Link>
               </SharpCard>
             </div>

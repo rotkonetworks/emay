@@ -38,13 +38,13 @@ export default function SupportPage() {
       <Script id="faq-schema" type="application/ld+json">
         {JSON.stringify(faqSchema)}
       </Script>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background">
         <Header />
         <main className="pt-24 pb-16">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="text-4xl font-bold text-black md:text-5xl">Support Center</h1>
-              <p className="mt-4 text-lg text-[#6E7391]">
+              <h1 className="text-4xl font-bold text-foreground md:text-5xl">Support Center</h1>
+              <p className="mt-4 text-lg text-muted-foreground">
                 Have questions? We've got answers. Find help with common topics below.
               </p>
             </div>
@@ -53,8 +53,10 @@ export default function SupportPage() {
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left text-lg font-semibold">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-base text-[#6E7391]">{faq.answer}</AccordionContent>
+                    <AccordionTrigger className="text-left text-lg font-semibold text-foreground">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-base text-muted-foreground">{faq.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
