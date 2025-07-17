@@ -2,20 +2,30 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import type { Locale, TranslationKey, LocaleData } from "./types"
 import { en } from "./locales/en"
 import { es } from "./locales/es"
+import { de } from "./locales/de"
+import { fr } from "./locales/fr"
+import { th } from "./locales/th"
+import { id } from "./locales/id"
+import { zh } from "./locales/zh"
 import { faqs } from "./content/faqs"
 import { blogPosts } from "./content/blog-posts"
 
 const locales: Record<Locale, LocaleData> = {
   en,
   es,
+  de,
+  fr,
+  th,
+  id,
+  zh,
 }
 
 type I18nContextType = {
   locale: Locale
-  setLocale: (locale: Locale) => void
   t: (key: TranslationKey) => string
   availableLocales: LocaleData[]
 }
@@ -31,25 +41,17 @@ export function useI18n() {
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en")
+  const pathname = usePathname()
+  const [locale, setLocale] = useState<Locale>("en")
 
   useEffect(() => {
-    // Check for saved locale or browser preference
-    const savedLocale = localStorage.getItem("locale") as Locale | null
-    const browserLocale = navigator.language.startsWith("es") ? "es" : "en"
-    const initialLocale = savedLocale || browserLocale
-
-    if (initialLocale !== locale) {
-      setLocaleState(initialLocale)
+    const localeFromPath = pathname.split("/")[1] as Locale
+    if (locales[localeFromPath]) {
+      setLocale(localeFromPath)
+      document.documentElement.lang = localeFromPath
+      localStorage.setItem("locale", localeFromPath)
     }
-  }, [locale])
-
-  const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale)
-    localStorage.setItem("locale", newLocale)
-    // Update document language
-    document.documentElement.lang = newLocale
-  }
+  }, [pathname])
 
   const t = (key: TranslationKey): string => {
     return locales[locale]?.translations[key] || key
@@ -57,7 +59,13 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   const availableLocales = Object.values(locales)
 
-  return <I18nContext.Provider value={{ locale, setLocale, t, availableLocales }}>{children}</I18nContext.Provider>
+  const contextValue = {
+    locale,
+    t,
+    availableLocales,
+  }
+
+  return <I18nContext.Provider value={contextValue}>{children}</I18nContext.Provider>
 }
 
 // Server-side translation function
@@ -65,7 +73,7 @@ export function getTranslations(locale: Locale) {
   return locales[locale]?.translations || locales.en.translations
 }
 
-// Get localized content - now using direct imports
+// Get localized content - using direct imports
 export function getLocalizedFAQs(locale: Locale) {
   return faqs[locale] || faqs.en
 }

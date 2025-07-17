@@ -69,6 +69,18 @@ export const en: LocaleData = {
 
     "support.title": "Support Center",
     "support.subtitle": "Have questions? We've got answers. Find help with common topics below.",
+    "support.getInTouch": "Get in Touch",
+    "support.contact.email.title": "Email Support",
+    "support.contact.email.description": "Direct access to our support team. Responses within 24 hours.",
+    "support.contact.email.button": "Send Email",
+    "support.contact.chat.title": "Live Chat",
+    "support.contact.chat.description": "Chat in real-time with our support specialists for immediate help.",
+    "support.contact.chat.button": "Start Chat",
+    "support.contact.forum.title": "Community Forum",
+    "support.contact.forum.description": "Ask questions and share solutions with fellow emay.me users.",
+    "support.contact.forum.button": "Visit Forum",
+    "support.contact.paidPlan": "Paid Plans",
+    "support.contact.freeForAll": "Free for all",
     "support.sectionTitle": "Need Help? We're Here for You",
     "support.sectionSubtitle": "Get the support you need with our comprehensive help resources and friendly team.",
     "support.faq.title": "Frequently Asked Questions",
@@ -95,5 +107,6 @@ export const en: LocaleData = {
 
     "common.loading": "Loading...",
     "common.error": "An error occurred. Please try again.",
+    "common.search": "Search...",
   },
 }

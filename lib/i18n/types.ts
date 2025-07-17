@@ -1,4 +1,4 @@
-export type Locale = "en" | "es"
+export type Locale = "en" | "es" | "de" | "fr" | "th" | "id" | "zh"
 
 export type TranslationKey =
   | "site.title"
@@ -50,6 +50,18 @@ export type TranslationKey =
   | "blog.getStartedFree"
   | "support.title"
   | "support.subtitle"
+  | "support.getInTouch"
+  | "support.contact.email.title"
+  | "support.contact.email.description"
+  | "support.contact.email.button"
+  | "support.contact.chat.title"
+  | "support.contact.chat.description"
+  | "support.contact.chat.button"
+  | "support.contact.forum.title"
+  | "support.contact.forum.description"
+  | "support.contact.forum.button"
+  | "support.contact.paidPlan"
+  | "support.contact.freeForAll"
   | "support.sectionTitle"
   | "support.sectionSubtitle"
   | "support.faq.title"
@@ -73,6 +85,7 @@ export type TranslationKey =
   | "auth.continueToInbox"
   | "common.loading"
   | "common.error"
+  | "common.search"
 
 export type Translations = Record<TranslationKey, string>
 

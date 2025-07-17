@@ -33,6 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: {
         en: `https://emay.me/blog/${post.slug}`,
         es: `https://emay.me/es/blog/${post.slug}`,
+        de: `https://emay.me/de/blog/${post.slug}`,
+        fr: `https://emay.me/fr/blog/${post.slug}`,
       },
     },
   }
@@ -45,13 +47,17 @@ export const viewport: Viewport = {
 }
 
 export async function generateStaticParams() {
-  const enPosts = getLocalizedBlogPosts("en")
-  const esPosts = getLocalizedBlogPosts("es")
+  const locales: Locale[] = ["en", "es", "de", "fr"]
+  const allParams: { locale: Locale; slug: string }[] = []
 
-  return [
-    ...enPosts.map((post) => ({ locale: "en" as const, slug: post.slug })),
-    ...esPosts.map((post) => ({ locale: "es" as const, slug: post.slug })),
-  ]
+  for (const locale of locales) {
+    const posts = getLocalizedBlogPosts(locale)
+    for (const post of posts) {
+      allParams.push({ locale, slug: post.slug })
+    }
+  }
+
+  return allParams
 }
 
 export default function BlogPostPage({ params }: Props) {

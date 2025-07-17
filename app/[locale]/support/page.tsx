@@ -6,7 +6,7 @@ import type { Metadata, Viewport } from "next"
 import type { Locale } from "@/lib/i18n/types"
 import Script from "next/script"
 import { SharpCard } from "@/components/ui/sharp-card"
-import { Mail, MessageCircle, Phone } from "lucide-react"
+import { Mail, MessageCircle, Users } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -56,27 +56,30 @@ export default function SupportPage({ params }: Props) {
   const contactOptions = [
     {
       Icon: Mail,
-      title: "Email Support",
-      description: "Get help via email within 24 hours",
-      action: "support@emay.me",
-      buttonText: "Send Email",
+      title: translations["support.contact.email.title"],
+      description: translations["support.contact.email.description"],
+      buttonText: translations["support.contact.email.button"],
       href: "mailto:support@emay.me",
+      badge: translations["support.contact.paidPlan"],
+      badgeColor: "bg-emay-violet text-white",
     },
     {
       Icon: MessageCircle,
-      title: "Live Chat",
-      description: "Chat with our support team in real-time",
-      action: "Start Chat",
-      buttonText: "Start Chat",
+      title: translations["support.contact.chat.title"],
+      description: translations["support.contact.chat.description"],
+      buttonText: translations["support.contact.chat.button"],
       href: "#chat",
+      badge: translations["support.contact.paidPlan"],
+      badgeColor: "bg-emay-violet text-white",
     },
     {
-      Icon: Phone,
-      title: "Community Forum",
-      description: "Connect with other users and get community support",
-      action: "Visit Forum",
-      buttonText: "Visit Forum",
+      Icon: Users,
+      title: translations["support.contact.forum.title"],
+      description: translations["support.contact.forum.description"],
+      buttonText: translations["support.contact.forum.button"],
       href: "/community",
+      badge: translations["support.contact.freeForAll"],
+      badgeColor: "bg-emay-lime text-emay-black",
     },
   ]
 
@@ -97,23 +100,34 @@ export default function SupportPage({ params }: Props) {
 
             {/* Contact Options */}
             <div id="contact" className="mx-auto max-w-5xl mb-16">
-              <h2 className="text-2xl font-bold text-foreground text-center mb-8">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-foreground text-center mb-8">
+                {translations["support.getInTouch"]}
+              </h2>
               <div className="grid gap-6 md:grid-cols-3">
                 {contactOptions.map((option) => (
-                  <SharpCard key={option.title} className="bg-card text-center">
-                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-emay-pink/10 text-emay-pink">
-                      <option.Icon className="h-6 w-6" />
+                  <SharpCard key={option.title} className="bg-card text-center flex flex-col">
+                    <div className="flex-grow">
+                      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-emay-pink/10 text-emay-pink">
+                        <option.Icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">{option.title}</h3>
+                      <p className="text-muted-foreground mb-4">{option.description}</p>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">{option.title}</h3>
-                    <p className="text-muted-foreground mb-4">{option.description}</p>
-                    <Link href={option.href}>
-                      <Button
-                        variant="outline"
-                        className="bg-card border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink hover:text-white"
+                    <div className="mt-auto">
+                      <div
+                        className={`inline-block px-3 py-1 text-xs font-semibold rounded-full mb-4 ${option.badgeColor}`}
                       >
-                        {option.buttonText}
-                      </Button>
-                    </Link>
+                        {option.badge}
+                      </div>
+                      <Link href={option.href}>
+                        <Button
+                          variant="outline"
+                          className="w-full bg-card border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink hover:text-white"
+                        >
+                          {option.buttonText}
+                        </Button>
+                      </Link>
+                    </div>
                   </SharpCard>
                 ))}
               </div>
@@ -121,7 +135,9 @@ export default function SupportPage({ params }: Props) {
 
             {/* FAQ Section */}
             <div className="mx-auto max-w-3xl">
-              <h2 className="text-2xl font-bold text-foreground text-center mb-8">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold text-foreground text-center mb-8">
+                {translations["support.popularQuestions"]}
+              </h2>
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>

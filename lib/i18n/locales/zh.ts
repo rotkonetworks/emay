@@ -1,0 +1,62 @@
+import type { LocaleData } from "../types"
+import { en } from "./en" // Use English as a fallback
+
+export const zh: LocaleData = {
+  locale: "zh",
+  name: "中文",
+  flag: "🇨🇳",
+  translations: {
+    ...en.translations, // Copy English translations
+    // --- Override with Chinese translations ---
+    "site.title": "emay.me - 基于 JMAP 的快速私密邮箱",
+    "site.description":
+      "体验更快、更私密的邮箱服务 emay.me，基于现代 JMAP 协议构建。告别缓慢臃肿的收件箱，迎接即时同步。",
+    "nav.features": "功能",
+    "nav.pricing": "价格",
+    "nav.blog": "博客",
+    "nav.support": "支持",
+    "nav.getStarted": "开始使用",
+    "hero.title": "快速、私密的邮箱。",
+    "hero.titleHighlight": "免费。",
+    "hero.subtitle": "专注于速度、安全和简洁的现代邮箱体验。几秒钟内从零到收件箱。",
+    "hero.form.placeholder": "您的姓名",
+    "hero.benefits.noPasswords": "永远无需密码",
+    "hero.benefits.freePlan": "慷慨的免费计划",
+    "hero.benefits.trial": "高级名称 7 天试用",
+    "features.title": "为速度和简洁而设计",
+    "features.subtitle": "我们不只是构建另一个邮箱服务。我们从头开始重新架构，以获得更好的性能和用户体验。",
+    "features.jmap.title": "由 JMAP 驱动",
+    "features.jmap.description":
+      "我们使用 JMAP，IMAP 的现代继承者。这意味着更快的消息获取、不耗电的推送通知，以及显著减少的数据使用量。",
+    "features.jmap.learnMore": "了解我们的技术",
+    "features.clients.title": "专用客户端",
+    "features.clients.description":
+      "更快的协议值得更快的客户端。我们的网页和即将推出的原生应用设计简洁、高性能，使用愉快。",
+    "pricing.title": "简单透明的价格",
+    "pricing.subtitle": "我们的核心服务免费。需要时添加高级功能。无捆绑，无压力。",
+    "pricing.premium.title": "高级地址",
+    "pricing.premium.description": "获得简短易记的 @emay.me 地址。",
+    "pricing.premium.price": "从 $5/年起",
+    "pricing.storage.title": "更多存储",
+    "pricing.storage.description": "随着需求增长增加邮箱大小。",
+    "pricing.storage.price": "从 $1/GB/年起",
+    "pricing.domains.title": "自定义域名",
+    "pricing.domains.description": "使用您自己的域名建立专业身份。",
+    "pricing.domains.price": "从 $10/年起",
+    "app.title": "原生 Android 应用。即将推出。",
+    "app.notifyMe": "通知我",
+    "blog.title": "emay.me 博客",
+    "blog.subtitle": "来自构建邮箱未来团队的更新、技术深度分析和新闻。",
+    "support.title": "支持中心",
+    "support.subtitle": "有问题？我们有答案。在下方找到常见主题的帮助。",
+    "footer.tagline": "网络上最快的邮箱服务。",
+    "auth.welcomeBack": "欢迎回来",
+    "auth.createAccount": "创建您的账户",
+    "auth.magicLink": "使用魔法链接继续",
+    "auth.github": "使用 GitHub 继续",
+    "auth.checkEmail": "检查您的邮箱",
+    "auth.verifyCode": "或输入 6 位数字代码",
+    "auth.continueToInbox": "继续到收件箱",
+    "common.search": "搜索...",
+  },
+}
