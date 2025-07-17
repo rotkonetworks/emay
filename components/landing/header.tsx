@@ -53,11 +53,11 @@ export function Header() {
           <nav className="flex items-center justify-between">
             <Link href="/" aria-label="Back to homepage">
               <Image
-                src="/emay-logo.svg"
+                src="/emay-icon.svg"
                 alt="emay.me logo"
                 width={120}
                 height={40}
-                className="h-8 w-auto md:h-10 dark:brightness-0 dark:invert"
+                className="h-8 w-auto md:h-10 filter dark:invert dark:brightness-0"
               />
             </Link>
 

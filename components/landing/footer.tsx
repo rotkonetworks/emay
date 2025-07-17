@@ -8,11 +8,11 @@ export function Footer() {
         <div className="mb-4 flex items-center justify-center gap-2">
           <Link href="/" aria-label="Back to homepage">
             <Image
-              src="/emay-logo.svg"
+              src="/emay-icon.svg"
               alt="emay.me"
               width={100}
               height={32}
-              className="h-8 w-auto brightness-0 invert dark:brightness-100 dark:invert-0"
+              className="h-8 w-auto filter dark:invert dark:brightness-0"
             />
           </Link>
         </div>

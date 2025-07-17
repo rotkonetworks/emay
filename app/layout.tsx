@@ -72,6 +72,14 @@ export default function RootLayout({
                 price: "0",
                 priceCurrency: "USD",
               },
+              publisher: {
+                "@type": "Organization",
+                name: "emay.me",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://emay.me/emay-icon.svg",
+                },
+              },
             }),
           }}
         />
