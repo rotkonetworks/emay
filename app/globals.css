@@ -4,26 +4,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 20% 97%; /* A very light gray for the page background */
+    --foreground: 224 71% 4%; /* Near black for text */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 224 71% 4%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --popover-foreground: 224 71% 4%;
+    --primary: 224 71% 4%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 220 15% 96%;
+    --secondary-foreground: 224 71% 4%;
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 15% 96%;
+    --accent-foreground: 224 71% 4%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71% 4%;
     --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 120 15% 12%; /* Lighter Dark Green */
+    --foreground: 120 10% 95%; /* Off-white */
+    --card: 120 12% 16%; /* Slightly lighter dark green */
+    --card-foreground: 120 10% 95%;
+    --popover: 120 15% 12%;
+    --popover-foreground: 120 10% 95%;
+    --primary: 120 10% 95%;
+    --primary-foreground: 120 15% 12%;
+    --secondary: 120 10% 20%;
+    --secondary-foreground: 120 10% 95%;
+    --muted: 120 10% 20%;
+    --muted-foreground: 120 8% 70%;
+    --accent: 120 10% 20%;
+    --accent-foreground: 120 10% 95%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 120 10% 95%;
+    --border: 120 10% 25%;
+    --input: 120 10% 25%;
+    --ring: 120 8% 70%;
   }
 }
 
@@ -33,14 +55,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply transition-colors duration-300;
   }
-  .prose h1,
-  .prose h2,
-  .prose h3 {
-    @apply text-black;
-  }
-  .prose p {
-    @apply text-[#6E7391];
+  body.no-scroll {
+    overflow: hidden;
   }
 }
 
@@ -56,6 +74,7 @@ html {
 
 /* Focus styles for accessibility */
 button:focus-visible,
-a:focus-visible {
-  @apply outline-2 outline-offset-2 outline-blue-600;
+a:focus-visible,
+input:focus-visible {
+  @apply outline-2 outline-offset-2 outline-emay-pink;
 }

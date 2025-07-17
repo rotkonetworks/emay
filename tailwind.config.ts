@@ -1,7 +1,5 @@
 import type { Config } from "tailwindcss"
 
-// all in fixtures is set to tailwind v3 as interims solutions
-
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -46,24 +44,8 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
         "emay-lime": "#e9fd57",
+        "emay-lime-subtle": "#f9ffef",
         "emay-pink": "#FF2670",
         "emay-black": "#000000",
         "emay-white": "#FFFFFF",
@@ -73,11 +55,13 @@ const config: Config = {
         "storm-200": "#DCE2E9",
         "storm-400": "#AEB7CB",
         "storm-700": "#6E7391",
+        "dark-green-button": "#384209",
+        "dark-green-field": "#5c6b12",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      boxShadow: {
+        sharp: "4px 4px 0px #000000",
+        "sharp-pink": `4px 4px 0px #FF2670`,
+        "sharp-dark": "4px 4px 0px #9ca3af",
       },
       keyframes: {
         "accordion-down": {
@@ -103,6 +87,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }
 export default config
