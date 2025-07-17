@@ -58,6 +58,15 @@ const config: Config = {
         "dark-green-button": "#384209",
         "dark-green-field": "#5c6b12",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "hero-gradient-left":
+          "linear-gradient(to left, transparent, var(--bg-color-mid) 50%, var(--bg-color-edge) 100%)",
+        "hero-gradient-top": "linear-gradient(to top, transparent 70%, var(--bg-color-edge) 100%)",
+        "hero-gradient-bottom": "linear-gradient(to bottom, transparent 70%, var(--bg-color-edge) 100%)",
+        "hero-glow": "radial-gradient(circle, var(--glow-color) 0%, transparent 70%)",
+      },
       boxShadow: {
         sharp: "4px 4px 0px #000000",
         "sharp-pink": `4px 4px 0px #FF2670`,
@@ -65,20 +74,12 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {

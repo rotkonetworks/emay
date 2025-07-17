@@ -24,6 +24,11 @@
     --input: 220 13% 91%;
     --ring: 224 71% 4%;
     --radius: 0.5rem;
+
+    /* Hero background variables */
+    --bg-color-mid: rgba(233, 253, 87, 0.1);
+    --bg-color-edge: rgba(233, 253, 87, 0.3);
+    --glow-color: rgba(255, 38, 112, 0.08);
   }
 
   .dark {
@@ -46,6 +51,11 @@
     --border: 120 10% 25%;
     --input: 120 10% 25%;
     --ring: 120 8% 70%;
+
+    /* Hero background variables for dark mode */
+    --bg-color-mid: rgba(56, 66, 9, 0.3);
+    --bg-color-edge: rgba(56, 66, 9, 0.5);
+    --glow-color: rgba(255, 38, 112, 0.15);
   }
 }
 
@@ -59,6 +69,78 @@
   }
   body.no-scroll {
     overflow: hidden;
+  }
+}
+
+@layer components {
+  .hero-bg-image {
+    @apply relative w-full h-full;
+    opacity: 0.95;
+    mix-blend-mode: soft-light;
+  }
+
+  .dark .hero-bg-image {
+    opacity: 0.6;
+    mix-blend-mode: overlay;
+  }
+
+  .hero-flex-left {
+    flex: 0.1;
+  }
+
+  .hero-flex-right {
+    flex: 0.9;
+    position: relative;
+  }
+
+  .feature-icon-wrapper {
+    @apply flex h-12 w-12 items-center justify-center;
+  }
+
+  /* Responsive flex values using media queries */
+  @media (min-width: 640px) {
+    .hero-flex-left {
+      flex: 0.15;
+    }
+    .hero-flex-right {
+      flex: 0.85;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-flex-left {
+      flex: 0.2;
+    }
+    .hero-flex-right {
+      flex: 0.8;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-flex-left {
+      flex: 0.35;
+    }
+    .hero-flex-right {
+      flex: 0.65;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-flex-left {
+      flex: 0.4;
+    }
+    .hero-flex-right {
+      flex: 0.6;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero-flex-left {
+      flex: 0.45;
+    }
+    .hero-flex-right {
+      flex: 0.55;
+    }
   }
 }
 

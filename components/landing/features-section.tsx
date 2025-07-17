@@ -16,7 +16,7 @@ export const FeaturesSection = React.memo(function FeaturesSection() {
         <MotionWrapper tag="article" variants={fadeInUp} key={title}>
           <SharpCard className="bg-white dark:bg-background">
             <div className="mb-4 flex items-center gap-4">
-              <div className={`flex h-12 w-12 items-center justify-center ${iconBgColor}`}>
+              <div className={`feature-icon-wrapper ${iconBgColor}`}>
                 <Icon className={`h-6 w-6 ${iconColor}`} />
               </div>
               <h3 className="text-2xl font-semibold text-black dark:text-white">{title}</h3>
