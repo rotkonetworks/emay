@@ -1,7 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
+import React from "react"
 
-export function Footer() {
+export const Footer = React.memo(function Footer() {
   return (
     <footer className="mt-16 bg-emay-lime dark:bg-black py-8 text-black dark:text-white border-t-4 border-white dark:border-black">
       <div className="container mx-auto px-4 text-center">
@@ -28,4 +29,4 @@ export function Footer() {
       </div>
     </footer>
   )
-}
+})

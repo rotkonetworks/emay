@@ -2,7 +2,7 @@ import { getAllPosts } from "@/lib/markdown"
 import Link from "next/link"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { SharpCard } from "@/components/ui/sharp-card"
 import { Clock, ArrowRight } from "lucide-react"
 
@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/blog",
   },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#FF2670",
 }
 
 export default async function BlogPage() {

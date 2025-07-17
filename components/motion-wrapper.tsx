@@ -1,7 +1,7 @@
 "use client"
 
+import React from "react"
 import { motion, type Variants } from "framer-motion"
-import type React from "react"
 
 type MotionWrapperProps = {
   children: React.ReactNode
@@ -13,7 +13,7 @@ type MotionWrapperProps = {
   viewport?: object
 }
 
-export function MotionWrapper({
+export const MotionWrapper = React.memo(function MotionWrapper({
   children,
   className,
   variants,
@@ -35,4 +35,4 @@ export function MotionWrapper({
       {children}
     </MotionComponent>
   )
-}
+})

@@ -1,13 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
+import React from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Menu, X, Moon, Sun } from "lucide-react"
 import { useTheme } from "@/lib/theme"
 
-export function Header() {
+export const Header = React.memo(function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
@@ -20,13 +21,13 @@ export function Header() {
     return () => document.body.classList.remove("no-scroll")
   }, [isMenuOpen])
 
-  const handleGetStartedClick = () => {
+  const handleGetStartedClick = useCallback(() => {
     const emailInput = document.querySelector('input[name="username"]') as HTMLInputElement | null
     emailInput?.focus({ preventScroll: true })
     window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+  }, [])
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = useCallback((href: string) => {
     setIsMenuOpen(false)
     if (href.startsWith("#")) {
       const element = document.querySelector(href)
@@ -34,17 +35,33 @@ export function Header() {
         element.scrollIntoView({ behavior: "smooth" })
       }
     } else {
-      // For external links or other pages
       window.location.href = href
     }
-  }
+  }, [])
 
-  const navLinks = [
-    { href: "#features", label: "Features" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "/blog", label: "Blog" },
-    { href: "/support", label: "Support" },
-  ]
+  const handleMenuToggle = useCallback(() => {
+    setIsMenuOpen((prev) => !prev)
+  }, [])
+
+  const handleMobileGetStarted = useCallback(() => {
+    setIsMenuOpen(false)
+    handleGetStartedClick()
+  }, [handleGetStartedClick])
+
+  const navLinks = useMemo(
+    () => [
+      { href: "#features", label: "Features" },
+      { href: "#pricing", label: "Pricing" },
+      { href: "/blog", label: "Blog" },
+      { href: "/support", label: "Support" },
+    ],
+    [],
+  )
+
+  const themeIcon = useMemo(
+    () => (theme === "light" ? <Moon className="h-5 w-5 text-black" /> : <Sun className="h-5 w-5 text-white" />),
+    [theme],
+  )
 
   return (
     <>
@@ -58,6 +75,7 @@ export function Header() {
                 width={120}
                 height={40}
                 className="h-8 w-auto md:h-10 filter dark:invert dark:brightness-0"
+                priority
               />
             </Link>
 
@@ -80,7 +98,7 @@ export function Header() {
                 className="p-2 bg-white/50 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1"
                 aria-label="Toggle theme"
               >
-                {theme === "light" ? <Moon className="h-5 w-5 text-black" /> : <Sun className="h-5 w-5 text-white" />}
+                {themeIcon}
               </button>
               <Button
                 onClick={handleGetStartedClick}
@@ -90,7 +108,7 @@ export function Header() {
                 Get Started
               </Button>
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={handleMenuToggle}
                 className="p-2 md:hidden bg-white/50 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1"
                 aria-label="Toggle menu"
               >
@@ -117,10 +135,7 @@ export function Header() {
                   </button>
                 ))}
                 <Button
-                  onClick={() => {
-                    setIsMenuOpen(false)
-                    handleGetStartedClick()
-                  }}
+                  onClick={handleMobileGetStarted}
                   className="text-white bg-emay-pink border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink/90"
                 >
                   Get Started
@@ -132,4 +147,4 @@ export function Header() {
       </header>
     </>
   )
-}
+})

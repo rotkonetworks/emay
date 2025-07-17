@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { MotionWrapper } from "@/components/motion-wrapper"
@@ -5,8 +7,34 @@ import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { featureCards } from "@/lib/data"
 import Link from "next/link"
 import { SharpCard } from "@/components/ui/sharp-card"
+import React, { useMemo } from "react"
 
-export function FeaturesSection() {
+export const FeaturesSection = React.memo(function FeaturesSection() {
+  const featureCardElements = useMemo(
+    () =>
+      featureCards.map(({ title, description, Icon, iconBgColor, iconColor }) => (
+        <MotionWrapper tag="article" variants={fadeInUp} key={title}>
+          <SharpCard className="bg-white dark:bg-background">
+            <div className="mb-4 flex items-center gap-4">
+              <div className={`flex h-12 w-12 items-center justify-center ${iconBgColor}`}>
+                <Icon className={`h-6 w-6 ${iconColor}`} />
+              </div>
+              <h3 className="text-2xl font-semibold text-black dark:text-white">{title}</h3>
+            </div>
+            <p className="text-storm-700 dark:text-storm-400">{description}</p>
+            {title === "Powered by JMAP" && (
+              <Link href="/blog/why-jmap-is-the-future-of-email" passHref>
+                <Button variant="link" className="mt-4 p-0 font-semibold text-[#7916F3]">
+                  Learn about our tech <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+          </SharpCard>
+        </MotionWrapper>
+      )),
+    [],
+  )
+
   return (
     <MotionWrapper
       id="features"
@@ -25,29 +53,8 @@ export function FeaturesSection() {
           </p>
         </MotionWrapper>
 
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:gap-12">
-          {featureCards.map(({ title, description, Icon, iconBgColor, iconColor }) => (
-            <MotionWrapper tag="article" variants={fadeInUp} key={title}>
-              <SharpCard className="bg-white dark:bg-background">
-                <div className="mb-4 flex items-center gap-4">
-                  <div className={`flex h-12 w-12 items-center justify-center ${iconBgColor}`}>
-                    <Icon className={`h-6 w-6 ${iconColor}`} />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-black dark:text-white">{title}</h3>
-                </div>
-                <p className="text-storm-700 dark:text-storm-400">{description}</p>
-                {title === "Powered by JMAP" && (
-                  <Link href="/blog/why-jmap-is-the-future-of-email" passHref>
-                    <Button variant="link" className="mt-4 p-0 font-semibold text-[#7916F3]">
-                      Learn about our tech <ArrowRight className="ml-1 h-4 w-4" />
-                    </Button>
-                  </Link>
-                )}
-              </SharpCard>
-            </MotionWrapper>
-          ))}
-        </div>
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:gap-12">{featureCardElements}</div>
       </div>
     </MotionWrapper>
   )
-}
+})

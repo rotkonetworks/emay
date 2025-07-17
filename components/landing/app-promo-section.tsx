@@ -1,10 +1,11 @@
+import React from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 
-export function AppPromoSection() {
+export const AppPromoSection = React.memo(function AppPromoSection() {
   return (
     <section className="bg-emay-violet/5 dark:bg-dark-green-field/20 py-16 lg:py-24">
       <div className="container mx-auto px-4">
@@ -53,4 +54,4 @@ export function AppPromoSection() {
       </div>
     </section>
   )
-}
+})

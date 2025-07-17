@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Github, Mail, CircleUserRound, CheckCircle, ArrowLeft } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
@@ -16,7 +16,11 @@ type StreamlinedAuthModalProps = {
 
 type AuthView = "main" | "magic_link_sent" | "oauth_success"
 
-export function StreamlinedAuthModal({ isOpen, onOpenChange, authState }: StreamlinedAuthModalProps) {
+export const StreamlinedAuthModal = React.memo(function StreamlinedAuthModal({
+  isOpen,
+  onOpenChange,
+  authState,
+}: StreamlinedAuthModalProps) {
   const [view, setView] = useState<AuthView>("main")
   const [email, setEmail] = useState("")
   const { flow, email: userEmail, isPremium } = authState
@@ -28,16 +32,23 @@ export function StreamlinedAuthModal({ isOpen, onOpenChange, authState }: Stream
     }
   }, [isOpen])
 
-  const handleMagicLink = () => {
+  const handleMagicLink = useCallback(() => {
     setView("magic_link_sent")
-  }
+  }, [])
 
-  const handleOAuth = () => {
-    // Simulate OAuth flow
+  const handleOAuth = useCallback(() => {
     setTimeout(() => {
       setView("oauth_success")
     }, 1000)
-  }
+  }, [])
+
+  const handleBackToMain = useCallback(() => {
+    setView("main")
+  }, [])
+
+  const handleContinueToInbox = useCallback(() => {
+    onOpenChange(false)
+  }, [onOpenChange])
 
   const renderContent = () => {
     switch (view) {
@@ -45,7 +56,7 @@ export function StreamlinedAuthModal({ isOpen, onOpenChange, authState }: Stream
         return (
           <div className="text-center">
             <button
-              onClick={() => setView("main")}
+              onClick={handleBackToMain}
               className="absolute top-4 left-4 text-storm-400 hover:text-black dark:hover:text-white"
             >
               <ArrowLeft />
@@ -77,7 +88,7 @@ export function StreamlinedAuthModal({ isOpen, onOpenChange, authState }: Stream
             <h3 className="text-xl font-semibold text-black dark:text-white">Welcome to emay.me!</h3>
             <p className="text-storm-700 dark:text-gray-300 mt-2 mb-4">Your account has been created successfully.</p>
             <Button
-              onClick={() => onOpenChange(false)}
+              onClick={handleContinueToInbox}
               className="h-12 w-full bg-emay-pink text-white border-2 border-black shadow-sharp hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink/90"
             >
               Continue to Inbox
@@ -151,4 +162,4 @@ export function StreamlinedAuthModal({ isOpen, onOpenChange, authState }: Stream
       </DialogContent>
     </Dialog>
   )
-}
+})

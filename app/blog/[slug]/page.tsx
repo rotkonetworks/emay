@@ -2,7 +2,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/markdown"
 import { notFound } from "next/navigation"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import Script from "next/script"
 import Link from "next/link"
 import { ArrowLeft, Clock, Calendar, User } from "lucide-react"
@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/blog/${post.slug}`,
     },
   }
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#FF2670",
 }
 
 export async function generateStaticParams() {

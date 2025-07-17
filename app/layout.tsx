@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
@@ -30,9 +30,13 @@ export const metadata: Metadata = {
     title: "emay.me - Fast, Private Email Built on JMAP",
     description: "Experience a faster, more private email with emay.me, built on the modern JMAP protocol.",
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#FF2670",
     generator: 'v0.dev'
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#FF2670",
 }
 
 export default function RootLayout({

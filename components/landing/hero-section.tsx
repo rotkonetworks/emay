@@ -1,10 +1,11 @@
+import React from "react"
 import { Check } from "lucide-react"
 import Image from "next/image"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, heroStaggerContainer, heroImageVariant } from "@/lib/animations"
 import { HeroForm } from "./hero-form"
 
-export function HeroSection() {
+export const HeroSection = React.memo(function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-start pt-8 pb-16 lg:items-center bg-emay-lime dark:bg-background">
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -66,4 +67,4 @@ export function HeroSection() {
       </div>
     </section>
   )
-}
+})

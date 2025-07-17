@@ -1,3 +1,6 @@
+"use client"
+
+import React, { useMemo } from "react"
 import { Star, Users, Globe } from "lucide-react"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
@@ -24,7 +27,24 @@ const features = [
   },
 ]
 
-export function SimplePricingSection() {
+export const SimplePricingSection = React.memo(function SimplePricingSection() {
+  const featureElements = useMemo(
+    () =>
+      features.map((feature) => (
+        <MotionWrapper tag="div" variants={fadeInUp} key={feature.title}>
+          <SharpCard className="bg-white dark:bg-card text-center">
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-emay-pink/10 text-emay-pink">
+              <feature.Icon className="h-6 w-6" />
+            </div>
+            <h3 className="mb-2 text-xl font-semibold text-black dark:text-white">{feature.title}</h3>
+            <p className="mb-4 text-storm-700 dark:text-storm-400">{feature.description}</p>
+            <p className="font-semibold text-black dark:text-white">{feature.price}</p>
+          </SharpCard>
+        </MotionWrapper>
+      )),
+    [],
+  )
+
   return (
     <MotionWrapper
       id="pricing"
@@ -42,21 +62,8 @@ export function SimplePricingSection() {
           </p>
         </MotionWrapper>
 
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
-          {features.map((feature) => (
-            <MotionWrapper tag="div" variants={fadeInUp} key={feature.title}>
-              <SharpCard className="bg-white dark:bg-card text-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-emay-pink/10 text-emay-pink">
-                  <feature.Icon className="h-6 w-6" />
-                </div>
-                <h3 className="mb-2 text-xl font-semibold text-black dark:text-white">{feature.title}</h3>
-                <p className="mb-4 text-storm-700 dark:text-storm-400">{feature.description}</p>
-                <p className="font-semibold text-black dark:text-white">{feature.price}</p>
-              </SharpCard>
-            </MotionWrapper>
-          ))}
-        </div>
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">{featureElements}</div>
       </div>
     </MotionWrapper>
   )
-}
+})

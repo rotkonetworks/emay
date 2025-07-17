@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 import { Button } from "@/components/ui/button"
 
 type AuthButtonProps = {
@@ -10,7 +10,12 @@ type AuthButtonProps = {
   isPrimary?: boolean
 }
 
-export function AuthButton({ icon, children, onClick, isPrimary = false }: AuthButtonProps) {
+export const AuthButton = React.memo(function AuthButton({
+  icon,
+  children,
+  onClick,
+  isPrimary = false,
+}: AuthButtonProps) {
   return (
     <Button
       variant="outline"
@@ -25,4 +30,4 @@ export function AuthButton({ icon, children, onClick, isPrimary = false }: AuthB
       </div>
     </Button>
   )
-}
+})
