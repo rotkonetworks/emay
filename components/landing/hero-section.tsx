@@ -9,15 +9,20 @@ export const HeroSection = React.memo(function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-start pt-8 pb-16 lg:items-center bg-emay-lime dark:bg-background">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <MotionWrapper tag="div" variants={heroImageVariant}>
-          <Image
-            src="/emay-bg-trans.webp"
-            alt="Abstract background image"
-            fill
-            className="object-contain object-right-bottom"
-            priority
-            aria-hidden="true"
-          />
+        <MotionWrapper tag="div" variants={heroImageVariant} className="flex h-full">
+          {/* Responsive left space: mobile (10%) -> sm (15%) -> md (20%) -> lg (35%) -> xl (40%) -> 2xl (45%) */}
+          <div className="flex-[0.1] sm:flex-[0.15] md:flex-[0.2] lg:flex-[0.35] xl:flex-[0.4] 2xl:flex-[0.45]" />
+          {/* Responsive image space: mobile (90%) -> sm (85%) -> md (80%) -> lg (65%) -> xl (60%) -> 2xl (55%) */}
+          <div className="flex-[0.9] sm:flex-[0.85] md:flex-[0.8] lg:flex-[0.65] xl:flex-[0.6] 2xl:flex-[0.55] relative">
+            <Image
+              src="/emay-bg-new.svg"
+              alt="Abstract background image"
+              fill
+              className="object-contain object-right-bottom"
+              priority
+              aria-hidden="true"
+            />
+          </div>
         </MotionWrapper>
       </div>
 
