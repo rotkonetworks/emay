@@ -66,7 +66,14 @@ export default function BlogPage({ params }: Props) {
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <span>{post.author}</span>
                           <span>&middot;</span>
-                          <span>{post.date}</span>
+                          <span>
+                            {new Intl.DateTimeFormat(params.locale, {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                              timeZone: "UTC",
+                            }).format(new Date(post.date))}
+                          </span>
                           <span>&middot;</span>
                           <div className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />

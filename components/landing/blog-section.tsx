@@ -44,7 +44,14 @@ export const BlogSection = React.memo(function BlogSection({ initialPosts }: { i
                       </div>
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
-                        <span>{post.date}</span>
+                        <span>
+                          {new Intl.DateTimeFormat(locale, {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            timeZone: "UTC",
+                          }).format(new Date(post.date))}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />

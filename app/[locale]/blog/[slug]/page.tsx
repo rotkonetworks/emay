@@ -67,6 +67,13 @@ export default function BlogPostPage({ params }: Props) {
     notFound()
   }
 
+  const displayDate = new Intl.DateTimeFormat(params.locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(post.date))
+
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -120,7 +127,7 @@ export default function BlogPostPage({ params }: Props) {
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      <span>{post.date}</span>
+                      <span>{displayDate}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
