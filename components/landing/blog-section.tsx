@@ -1,23 +1,19 @@
 "use client"
 
-import React, { useMemo } from "react"
+import React from "react"
 import Link from "next/link"
 import { ArrowRight, Clock, Calendar, User } from "lucide-react"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { SharpCard } from "@/components/ui/sharp-card"
-import { useI18n, getLocalizedBlogPosts } from "@/lib/i18n"
+import { useI18n } from "@/lib/i18n"
 import { Button } from "@/components/ui/button"
+import type { BlogPost } from "@/lib/i18n/content/blog-posts"
 
-export const BlogSection = React.memo(function BlogSection() {
+export const BlogSection = React.memo(function BlogSection({ initialPosts }: { initialPosts: BlogPost[] }) {
   const { t, locale } = useI18n()
 
-  const blogPosts = useMemo(() => {
-    const posts = getLocalizedBlogPosts(locale)
-    return posts.slice(0, 2) // Show only the latest 2 posts
-  }, [locale])
-
-  if (blogPosts.length === 0) {
+  if (!initialPosts || initialPosts.length === 0) {
     return null
   }
 
@@ -30,7 +26,7 @@ export const BlogSection = React.memo(function BlogSection() {
         </MotionWrapper>
 
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
-          {blogPosts.map((post) => (
+          {initialPosts.map((post) => (
             <MotionWrapper tag="article" variants={fadeInUp} key={post.slug}>
               <Link href={`/${locale}/blog/${post.slug}`} className="block group h-full">
                 <SharpCard className="bg-card h-full flex flex-col">

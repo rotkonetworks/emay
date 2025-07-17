@@ -1,8 +1,7 @@
-import { getLocalizedBlogPosts } from "@/lib/i18n"
+import { getLocalizedBlogPosts, getTranslations, availableLocales } from "@/lib/i18n/server"
 import { notFound } from "next/navigation"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
-import { getTranslations } from "@/lib/i18n"
 import type { Metadata, Viewport } from "next"
 import type { Locale } from "@/lib/i18n/types"
 import Script from "next/script"
@@ -47,10 +46,9 @@ export const viewport: Viewport = {
 }
 
 export async function generateStaticParams() {
-  const locales: Locale[] = ["en", "es", "de", "fr"]
   const allParams: { locale: Locale; slug: string }[] = []
 
-  for (const locale of locales) {
+  for (const locale of availableLocales) {
     const posts = getLocalizedBlogPosts(locale)
     for (const post of posts) {
       allParams.push({ locale, slug: post.slug })

@@ -11,8 +11,6 @@ import { fr } from "./locales/fr"
 import { th } from "./locales/th"
 import { id } from "./locales/id"
 import { zh } from "./locales/zh"
-import { faqs } from "./content/faqs"
-import { blogPosts } from "./content/blog-posts"
 
 const locales: Record<Locale, LocaleData> = {
   en,
@@ -66,18 +64,4 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }
 
   return <I18nContext.Provider value={contextValue}>{children}</I18nContext.Provider>
-}
-
-// Server-side translation function
-export function getTranslations(locale: Locale) {
-  return locales[locale]?.translations || locales.en.translations
-}
-
-// Get localized content - using direct imports
-export function getLocalizedFAQs(locale: Locale) {
-  return faqs[locale] || faqs.en
-}
-
-export function getLocalizedBlogPosts(locale: Locale) {
-  return blogPosts[locale] || blogPosts.en
 }

@@ -6,16 +6,12 @@ import { ArrowRight, HelpCircle, MessageCircle, Book } from "lucide-react"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { SharpCard } from "@/components/ui/sharp-card"
-import { useI18n, getLocalizedFAQs } from "@/lib/i18n"
+import { useI18n } from "@/lib/i18n"
 import { Button } from "@/components/ui/button"
+import type { FAQ } from "@/lib/i18n/content/faqs"
 
-export const SupportSection = React.memo(function SupportSection() {
+export const SupportSection = React.memo(function SupportSection({ initialFaqs }: { initialFaqs: FAQ[] }) {
   const { t, locale } = useI18n()
-
-  const faqs = useMemo(() => {
-    const allFaqs = getLocalizedFAQs(locale)
-    return allFaqs.slice(0, 3) // Show only the first 3 FAQs
-  }, [locale])
 
   const supportCards = useMemo(
     () => [
@@ -87,7 +83,7 @@ export const SupportSection = React.memo(function SupportSection() {
         <MotionWrapper tag="div" variants={fadeInUp} className="mx-auto max-w-3xl">
           <h3 className="mb-6 text-2xl font-bold text-foreground text-center">{t("support.popularQuestions")}</h3>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {initialFaqs.map((faq, index) => (
               <MotionWrapper tag="div" variants={fadeInUp} key={index}>
                 <SharpCard className="bg-card">
                   <h4 className="font-semibold text-foreground mb-2">{faq.question}</h4>

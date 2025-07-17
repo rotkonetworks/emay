@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
-import { getTranslations, getLocalizedFAQs } from "@/lib/i18n"
+import { getTranslations, getLocalizedFAQs } from "@/lib/i18n/server"
 import type { Metadata, Viewport } from "next"
 import type { Locale } from "@/lib/i18n/types"
 import Script from "next/script"

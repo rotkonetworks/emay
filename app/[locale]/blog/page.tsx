@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
-import { getTranslations, getLocalizedBlogPosts } from "@/lib/i18n"
+import { getTranslations, getLocalizedBlogPosts } from "@/lib/i18n/server"
 import type { Metadata, Viewport } from "next"
 import type { Locale } from "@/lib/i18n/types"
 import { SharpCard } from "@/components/ui/sharp-card"
