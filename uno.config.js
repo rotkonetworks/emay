@@ -55,7 +55,7 @@ export default defineConfig({
     }
   },
   shortcuts: {
-    'shadow-sharp': 'shadow-[4px_4px_0px_hsl(var(--border))]',
+    'shadow-sharp': 'shadow-[4px_4px_0px_#000000]',
     'btn-primary': 'px-6 py-3 bg-primary text-primary-foreground font-semibold border-2 border-border shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1',
     'sharp-card': 'bg-card p-6 border-2 border-border shadow-sharp',
     'feature-icon-wrapper': 'flex h-12 w-12 items-center justify-center',

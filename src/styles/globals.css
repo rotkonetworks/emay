@@ -1,23 +1,23 @@
 :root {
-  /* Light mode colors */
+  /* Light mode colors - matching original */
   --background: 0 0% 100%;
-  --foreground: 0 0% 0%;
+  --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 0%;
+  --card-foreground: 0 0% 3.9%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 0%;
-  --primary: 339 100% 57%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 60 100% 71%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 220 15% 96%;
-  --muted-foreground: 220 9% 46%;
-  --accent: 60 100% 71%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 0%;
-  --input: 0 0% 0%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 339 100% 57%; /* emay pink */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 73 100% 71%; /* emay lime */
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 73 100% 71%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 0%; /* Black borders */
+  --input: 0 0% 0%; /* Black input borders */
   --ring: 339 100% 57%;
   
   /* Custom colors */
@@ -26,42 +26,39 @@
   --emay-violet: 262 83% 58%;
   --emay-cyan: 180 100% 50%;
   
-  /* Hero gradients */
-  --bg-color-mid: rgba(233, 253, 87, 0.1);
-  --bg-color-edge: rgba(233, 253, 87, 0.3);
-  --glow-color: rgba(255, 38, 112, 0.08);
+  /* Hero specific */
+  --hero-bg: 73 100% 71%;
 }
 
 .dark {
-  /* Dark mode colors */
-  --background: 0 0% 8%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 12%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 12%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 339 100% 57%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 73 100% 71%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 0 0% 20%;
-  --muted-foreground: 0 0% 70%;
-  --accent: 73 100% 71%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 62% 30%;
+  /* Dark mode with dark green theme to match the image */
+  --background: 150 20% 10%; /* Dark green-tinted background */
+  --foreground: 60 10% 94%; /* Slightly warm white */
+  --card: 150 15% 13%; /* Slightly lighter dark green */
+  --card-foreground: 60 10% 94%;
+  --popover: 150 15% 13%;
+  --popover-foreground: 60 10% 94%;
+  --primary: 339 100% 57%; /* Keep pink consistent */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 150 25% 20%; /* Dark green for secondary elements */
+  --secondary-foreground: 60 10% 94%;
+  --muted: 150 15% 25%; /* Muted dark green */
+  --muted-foreground: 60 5% 65%; /* Lighter gray-green for muted text */
+  --accent: 175 50% 40%; /* Teal accent to match envelopes */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 30%;
-  --input: 0 0% 30%;
-  --ring: 339 100% 57%;
+  --border: 0 0% 0%; /* Keep black borders in dark mode too */
+  --input: 0 0% 0%; /* Keep black input borders */
+  --ring: 175 50% 40%; /* Teal ring to match theme */
   
-  /* Hero gradients for dark mode */
-  --bg-color-mid: rgba(0, 0, 0, 0.5);
-  --bg-color-edge: rgba(0, 0, 0, 0.8);
-  --glow-color: rgba(255, 38, 112, 0.15);
+  /* Hero specific for dark mode */
+  --hero-bg: 150 25% 8%; /* Very dark green for hero */
 }
 
 * {
   box-sizing: border-box;
+  border-color: hsl(var(--border));
 }
 
 body {
@@ -69,7 +66,7 @@ body {
   color: hsl(var(--foreground));
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -89,15 +86,6 @@ body {
   min-height: 100vh;
 }
 
-/* Hero background image styling */
-.hero-bg-image {
-  opacity: 0.95;
-  mix-blend-mode: soft-light;
-}
-
-.dark .hero-bg-image {
-  opacity: 0.6;
-  mix-blend-mode: overlay;
 }
 
 /* Performance optimizations */
@@ -115,6 +103,7 @@ img {
 .bg-muted { background-color: hsl(var(--muted)); }
 .bg-accent { background-color: hsl(var(--accent)); }
 .bg-destructive { background-color: hsl(var(--destructive)); }
+.bg-hero { background-color: hsl(var(--hero-bg)); }
 
 .text-background { color: hsl(var(--background)); }
 .text-foreground { color: hsl(var(--foreground)); }
@@ -139,26 +128,10 @@ img {
 /* Ring colors */
 .ring-ring { --tw-ring-color: hsl(var(--ring)); }
 
-/* Sharp shadow with better dark mode support */
+/* Sharp shadow - always black */
 .shadow-sharp { 
-  box-shadow: 4px 4px 0px hsl(var(--border)); 
+  box-shadow: 4px 4px 0px #000000; 
 }
-
-/* Custom color utilities */
-.bg-emay-pink { background-color: hsl(var(--emay-pink)); }
-.bg-emay-lime { background-color: hsl(var(--emay-lime)); }
-.bg-emay-violet { background-color: hsl(var(--emay-violet)); }
-.bg-emay-cyan { background-color: hsl(var(--emay-cyan)); }
-
-.text-emay-pink { color: hsl(var(--emay-pink)); }
-.text-emay-lime { color: hsl(var(--emay-lime)); }
-.text-emay-violet { color: hsl(var(--emay-violet)); }
-.text-emay-cyan { color: hsl(var(--emay-cyan)); }
-
-.border-emay-pink { border-color: hsl(var(--emay-pink)); }
-.border-emay-lime { border-color: hsl(var(--emay-lime)); }
-.border-emay-violet { border-color: hsl(var(--emay-violet)); }
-.border-emay-cyan { border-color: hsl(var(--emay-cyan)); }
 
 /* Focus states */
 .focus-visible\:ring-2:focus-visible {
@@ -186,6 +159,15 @@ img {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+/* Dark mode specific enhancements */
+.dark .bg-card {
+  background-image: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(150 15% 15%) 100%);
+}
+
+.dark .bg-hero {
+  background-image: linear-gradient(135deg, hsl(var(--hero-bg)) 0%, hsl(150 30% 10%) 100%);
 }
 
 /* Prose styles for blog posts */
@@ -226,7 +208,29 @@ img {
   color: hsl(var(--muted-foreground));
 }
 
-/* Gradient utilities */
-.bg-radial-gradient {
-  background-image: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-to));
+/* Custom color utilities */
+.bg-emay-pink { background-color: hsl(var(--emay-pink)); }
+.bg-emay-lime { background-color: hsl(var(--emay-lime)); }
+.bg-emay-violet { background-color: hsl(var(--emay-violet)); }
+.bg-emay-cyan { background-color: hsl(var(--emay-cyan)); }
+
+.text-emay-pink { color: hsl(var(--emay-pink)); }
+.text-emay-lime { color: hsl(var(--emay-lime)); }
+.text-emay-violet { color: hsl(var(--emay-violet)); }
+.text-emay-cyan { color: hsl(var(--emay-cyan)); }
+
+/* Text balance utility */
+.text-balance {
+  text-wrap: balance;
 }
+
+
+
+/* Dark mode - ensure image is visible */
+.dark .hero-bg-image {
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+
+
