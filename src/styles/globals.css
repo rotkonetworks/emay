@@ -1,0 +1,56 @@
+:root {
+  --background: 220 20% 97%;
+  --foreground: 224 71% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71% 4%;
+  --muted: 220 15% 96%;
+  --muted-foreground: 220 9% 46%;
+  --border: 220 13% 91%;
+  --emay-pink: 339 100% 57%;
+  
+  --bg-color-mid: rgba(233, 253, 87, 0.1);
+  --bg-color-edge: rgba(233, 253, 87, 0.3);
+  --glow-color: rgba(255, 38, 112, 0.08);
+}
+
+.dark {
+  --background: 120 15% 12%;
+  --foreground: 120 10% 95%;
+  --card: 120 12% 16%;
+  --card-foreground: 120 10% 95%;
+  --muted: 120 10% 20%;
+  --muted-foreground: 120 8% 70%;
+  --border: 120 10% 25%;
+  
+  --bg-color-mid: rgba(56, 66, 9, 0.3);
+  --bg-color-edge: rgba(56, 66, 9, 0.5);
+  --glow-color: rgba(255, 38, 112, 0.15);
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.hero-bg-image {
+  opacity: 0.95;
+  mix-blend-mode: soft-light;
+}
+
+.dark .hero-bg-image {
+  opacity: 0.6;
+  mix-blend-mode: overlay;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  content-visibility: auto;
+}

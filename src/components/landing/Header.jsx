@@ -1,0 +1,113 @@
+import { createSignal, Show, For } from 'solid-js'
+import { useNavigate, useLocation } from '@solidjs/router'
+import { useTheme } from '@/lib/theme'
+import { useI18n } from '@/lib/i18n'
+import { Button } from '../ui/Button'
+import { LanguageSwitcher } from './LanguageSwitcher'
+
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = createSignal(false)
+  const { theme, toggleTheme } = useTheme()
+  const { t, locale } = useI18n()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const navLinks = [
+    { href: '#features', label: t('nav.features') },
+    { href: '#pricing', label: t('nav.pricing') },
+    { href: '/blog', label: t('nav.blog') },
+    { href: '/support', label: t('nav.support') },
+  ]
+
+  const handleNavClick = (href) => {
+    setIsMenuOpen(false)
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href)
+      element?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      const prefix = locale() === 'en' ? '' : `/${locale()}`
+      navigate(`${prefix}${href}`)
+    }
+  }
+
+  const getHomeLink = () => locale() === 'en' ? '/' : `/${locale()}`
+
+  return (
+    <header class="fixed top-0 left-0 right-0 z-40 border-b border-black/10 dark:border-white/10 bg-emay-lime/80 dark:bg-background/80 backdrop-blur-sm">
+      <div class="container mx-auto px-4 py-4">
+        <nav class="flex items-center justify-between">
+          <a href={getHomeLink()} aria-label="Back to homepage">
+            <img
+              src="/emay-icon.svg"
+              alt="emay.me logo"
+              class="h-8 w-auto md:h-10 filter dark:invert dark:brightness-0"
+            />
+          </a>
+
+          <div class="hidden items-center gap-3 lg:flex">
+            <For each={navLinks}>
+              {(link) => (
+                <button
+                  onClick={() => handleNavClick(link.href)}
+                  class="px-4 py-2 text-sm font-medium text-black dark:text-white bg-white/50 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all duration-200 ease-in-out hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink hover:text-white dark:hover:bg-emay-pink"
+                >
+                  {link.label}
+                </button>
+              )}
+            </For>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              onClick={toggleTheme}
+              class="p-2 bg-white/50 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+              aria-label="Toggle theme"
+            >
+              <Show when={theme() === 'light'} fallback={<div class="i-lucide-sun h-5 w-5 text-white" />}>
+                <div class="i-lucide-moon h-5 w-5 text-black" />
+              </Show>
+            </button>
+            
+            <Button
+              class="hidden lg:block text-white bg-emay-pink border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink/90"
+              aria-label="Get started with a new account"
+            >
+              {t('nav.getStarted')}
+            </Button>
+            
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen())}
+              class="p-2 lg:hidden bg-white/50 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+              aria-label="Toggle menu"
+            >
+              <Show when={isMenuOpen()} fallback={<div class="i-lucide-menu h-6 w-6 text-black dark:text-white" />}>
+                <div class="i-lucide-x h-6 w-6 text-black dark:text-white" />
+              </Show>
+            </button>
+          </div>
+        </nav>
+
+        <Show when={isMenuOpen()}>
+          <div class="lg:hidden mt-4 pb-4">
+            <div class="flex flex-col gap-3">
+              <For each={navLinks}>
+                {(link) => (
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    class="px-4 py-3 text-base font-medium text-black dark:text-white bg-white/80 dark:bg-dark-green-button border-2 border-black shadow-sharp transition-all duration-200 ease-in-out hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink hover:text-white text-left"
+                  >
+                    {link.label}
+                  </button>
+                )}
+              </For>
+              <Button class="text-white bg-emay-pink border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-emay-pink/90">
+                {t('nav.getStarted')}
+              </Button>
+            </div>
+          </div>
+        </Show>
+      </div>
+    </header>
+  )
+}
