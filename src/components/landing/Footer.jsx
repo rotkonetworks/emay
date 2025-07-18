@@ -11,7 +11,7 @@ export function Footer() {
         <div class="mb-4 flex items-center justify-center gap-2">
           <a href={`/${locale()}`} aria-label="Back to homepage">
               <img
-                src="/emay-icon.svg"
+                src="/emay-logo.svg"
                 alt="emay.me"
                 class="h-8 w-auto dark:hidden"
               />

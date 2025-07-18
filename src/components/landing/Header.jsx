@@ -64,7 +64,7 @@ export function Header() {
         <nav class="flex items-center justify-between">
           <a href={getHomeLink()} onClick={handleLogoClick} aria-label="Back to homepage">
             <img
-              src="/emay-icon.svg"
+              src="/emay-logo.svg"
               alt="emay.me logo"
               class="h-8 w-auto md:h-10 dark:hidden"
             />
