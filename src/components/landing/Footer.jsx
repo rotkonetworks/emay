@@ -10,11 +10,16 @@ export function Footer() {
       <div class="container mx-auto px-4 text-center">
         <div class="mb-4 flex items-center justify-center gap-2">
           <a href={`/${locale()}`} aria-label="Back to homepage">
-            <img
-              src="/emay-icon.svg"
-              alt="emay.me"
-              class="h-8 w-auto"
-            />
+              <img
+                src="/emay-icon.svg"
+                alt="emay.me"
+                class="h-8 w-auto dark:hidden"
+              />
+              <img
+                src="/emay-logo-dark.svg"
+                alt="emay.me"
+                class="h-8 w-auto hidden dark:block"
+              />
           </a>
         </div>
         <div class="mb-4 flex justify-center gap-4 text-muted-foreground">
@@ -31,7 +36,7 @@ export function Footer() {
             {t('nav.support')}
           </a>
         </div>
-        <p class="text-muted-foreground">© 2024 emay.me. {t('footer.tagline')}</p>
+        <p class="text-muted-foreground">© 2025 emay.me. {t('footer.tagline')}</p>
       </div>
     </footer>
   )
