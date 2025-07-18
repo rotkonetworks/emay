@@ -13,27 +13,51 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      'emay-lime': '#e9fd57',
-      'emay-lime-subtle': '#f9ffef',
-      'emay-pink': '#FF2670',
-      'emay-black': '#000000',
-      'emay-white': '#FFFFFF',
-      'emay-lime-bright': '#E4FF07',
-      'emay-cyan': '#07FFFF',
-      'emay-violet': '#7916F3',
-      'storm-200': '#DCE2E9',
-      'storm-400': '#AEB7CB',
-      'storm-700': '#6E7391',
-      'dark-green-button': '#384209',
-      'dark-green-field': '#5c6b12',
+      // Map to CSS variables
+      background: 'hsl(var(--background))',
+      foreground: 'hsl(var(--foreground))',
+      card: {
+        DEFAULT: 'hsl(var(--card))',
+        foreground: 'hsl(var(--card-foreground))'
+      },
+      popover: {
+        DEFAULT: 'hsl(var(--popover))',
+        foreground: 'hsl(var(--popover-foreground))'
+      },
+      primary: {
+        DEFAULT: 'hsl(var(--primary))',
+        foreground: 'hsl(var(--primary-foreground))'
+      },
+      secondary: {
+        DEFAULT: 'hsl(var(--secondary))',
+        foreground: 'hsl(var(--secondary-foreground))'
+      },
+      muted: {
+        DEFAULT: 'hsl(var(--muted))',
+        foreground: 'hsl(var(--muted-foreground))'
+      },
+      accent: {
+        DEFAULT: 'hsl(var(--accent))',
+        foreground: 'hsl(var(--accent-foreground))'
+      },
+      destructive: {
+        DEFAULT: 'hsl(var(--destructive))',
+        foreground: 'hsl(var(--destructive-foreground))'
+      },
+      border: 'hsl(var(--border))',
+      input: 'hsl(var(--input))',
+      ring: 'hsl(var(--ring))',
+      // Custom colors
+      'emay-pink': 'hsl(var(--emay-pink))',
+      'emay-lime': 'hsl(var(--emay-lime))',
+      'emay-violet': 'hsl(var(--emay-violet))',
+      'emay-cyan': 'hsl(var(--emay-cyan))',
     }
   },
   shortcuts: {
-    'shadow-sharp': 'shadow-[4px_4px_0px_#000000]',
-    'shadow-sharp-pink': 'shadow-[4px_4px_0px_#FF2670]',
-    'shadow-sharp-dark': 'shadow-[4px_4px_0px_#9ca3af]',
-    'btn-primary': 'px-6 py-3 bg-emay-pink text-white font-semibold border-2 border-black shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1',
-    'sharp-card': 'bg-white dark:bg-card p-6 border-2 border-black shadow-sharp',
+    'shadow-sharp': 'shadow-[4px_4px_0px_hsl(var(--border))]',
+    'btn-primary': 'px-6 py-3 bg-primary text-primary-foreground font-semibold border-2 border-border shadow-sharp transition-all hover:shadow-none hover:translate-x-1 hover:translate-y-1',
+    'sharp-card': 'bg-card p-6 border-2 border-border shadow-sharp',
     'feature-icon-wrapper': 'flex h-12 w-12 items-center justify-center',
   },
   safelist: [
@@ -58,5 +82,12 @@ export default defineConfig({
     'i-lucide-help-circle',
     'i-lucide-message-circle',
     'i-lucide-book',
+    'i-lucide-chevron-down',
+    'i-lucide-share-2',
+    'i-lucide-check-circle',
+    'i-lucide-file-x',
+    'i-lucide-chevron-right',
+    'i-lucide-book-open',
+    'i-lucide-circle-user-round',
   ]
 })
